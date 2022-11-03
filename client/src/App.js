@@ -15,17 +15,20 @@ import BoardAdmin from "./components/BoardAdmin";
 import Upload from "./components/Upload";
 
 const App = () => {
-  const USER_URL = "/files/" + JSON.parse(localStorage.getItem("user"))["username"];
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [userUrl, setUserUrl] = useState("")
 
   useEffect(() => {
+    
     const user = AuthService.getCurrentUser();
     if (user) {
+      const USER_URL = "/files/" + JSON.parse(localStorage.getItem("user"))["username"];
       setCurrentUser(user);
       setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
       setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
+      setUserUrl(USER_URL);
     }
   }, []);
 
@@ -64,7 +67,7 @@ const App = () => {
 
           {currentUser && (
             <li className="nav-item">
-              <Link to={USER_URL} className="nav-link">
+              <Link to={userUrl} className="nav-link">
                 User
               </Link>
             </li>
@@ -116,7 +119,7 @@ const App = () => {
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />
-          <Route path={USER_URL} element={<BoardUser/>} />
+          <Route path={userUrl} element={<BoardUser/>} />
           <Route path="/mod" element={<BoardModerator/>} />
           <Route path="/admin" element={<BoardAdmin/>} />
           <Route path="/upload" element={<Upload/>} />
