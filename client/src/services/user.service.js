@@ -9,6 +9,10 @@ const getPublicContent = () => {
   return axios.get(API_URL + "all");
 };
 
+const getTimeline = () => {
+  return axios.get(API_USER_URL, { headers: authHeader() });
+};
+
 const getUserBoard = () => {
   return axios.get(API_USER_URL + JSON.parse(localStorage.getItem("user"))["username"], { headers: authHeader() });
 };
@@ -31,7 +35,8 @@ const UserService = {
   getUserBoard,
   getModeratorBoard,
   getAdminBoard,
-  getFile
+  getFile,
+  getTimeline
 };
 
 export default UserService;

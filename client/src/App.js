@@ -13,12 +13,14 @@ import BoardUser from "./components/BoardUser";
 import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import Upload from "./components/Upload";
+import Timeline from "./components/Timeline";
 
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [userUrl, setUserUrl] = useState("")
+  const [timeline, setTimeline] = useState(false);
 
   useEffect(() => {
     
@@ -29,6 +31,7 @@ const App = () => {
       setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
       setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
       setUserUrl(USER_URL);
+      setTimeline(true);
     }
   }, []);
 
@@ -48,6 +51,14 @@ const App = () => {
               Home
             </Link>
           </li>
+
+          {timeline && (
+            <li className="nav-item">
+              <Link to={"/files"} className="nav-link">
+                Timeline
+              </Link>
+            </li>
+          )}          
 
           {showModeratorBoard && (
             <li className="nav-item">
@@ -116,6 +127,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/home" element={<Home/>} />
+          <Route path="/files" element={<Timeline/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/profile" element={<Profile/>} />

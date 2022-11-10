@@ -91,6 +91,10 @@ button:hover {
   justify-content: center;
 }
 
+#mainPhoto{
+  height: 400px;
+}
+
 .nav-link:hover{
   color: #E3D26F;
 }
@@ -107,13 +111,38 @@ p, ul{
   color: #280004;
 }
 
+.img-grid{
+  margin:20px auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 40px;
+  padding: 10px 30px 0px 30px;
+}
+
+.timeline-grid{
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 40px;
+  padding: 10px 30px 0px 30px;
+  justify-content: center;
+}
+
 .img-wrap{
   overflow: hidden;
-  height: 300px;
-  padding: 0px 0;
+  height: 100px;
+  padding: 70px 0;
   position: relative;
   opacity: 0.8;
   box-shadow: 1px 2px 3px rgba(0,0,0,0.1);
+}
+
+.grid-container{
+  background-color: #280004;
+  color: #F7F4F3;
+  height: 160px;
+  /* display: flex; */
+  justify-content: center; 
 }
 
 .img-wrap img{
@@ -121,7 +150,7 @@ p, ul{
   min-height: 100%;
   max-width: 150%;
   max-width: 150%;
-  /* position: absolute; */
+  position: absolute;
   top: 0;
   left: 0;
 }

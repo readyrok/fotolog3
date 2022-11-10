@@ -6,7 +6,7 @@ import UserService from "../services/user.service";
 
 const BoardUser = () => {
   const [content, setContent] = useState("");
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
   const [id, setId] = useState("");
@@ -15,13 +15,13 @@ const BoardUser = () => {
   useEffect(() => {
     UserService.getUserBoard().then(
       (response) => {
-        const images = Object.entries(response.data);
+        const LAST_PHOTO_INDEX = response.data.length - 1;
+        setImages(Object.entries(response.data));
 
-        setContent(images);
-        setUrl(response.data[response.data.length - 1]["url"]);
-        setDescription(response.data[response.data.length - 1]["description"]);
+        setUrl(response.data[LAST_PHOTO_INDEX]["url"]);
+        setDescription(response.data[LAST_PHOTO_INDEX]["description"]);
         setUsername(JSON.parse(localStorage.getItem("user"))["username"]);
-        setId(response.data[response.data.length - 1]["id"]);
+        setId(response.data[LAST_PHOTO_INDEX]["id"]);
       },
       (error) => {
         const _content =
@@ -34,13 +34,7 @@ const BoardUser = () => {
         setContent(_content);
       }
     );
-  }, [url, description]);
-
-  // for (let i = 0; i < content.length; i++) {
-  //   setImages(content[i]);
-  //   console.log(content[i]);
-  //   console.log("aici");
-  // }
+  }, [url, description, images]);
 
   return (
     <Fragment>
@@ -50,7 +44,7 @@ const BoardUser = () => {
         </header>
         <div className="mainPhotoContainer">
           <motion.div
-                className="img-wrap"
+                className="main-img-wrap"
                 key={id}
                 layout
                 whileHover={{ opacity: 1 }}
@@ -65,31 +59,27 @@ const BoardUser = () => {
               />
           </motion.div>
         </div>
-        {/* <div className="img-grid">
-          {content.array.forEach(element => {
-            return (<div>{element}</div>)
-          })}
-        </div> */}
+        <div className="grid-container">
+          <div className="img-grid">
+            {images.map((photo) => {
+              return (<motion.div
+                className="img-wrap"
+                key={photo[1].id}
+                layout
+                whileHover={{ opacity: 1 }}
+                onClick={() => setUrl(photo[1].url)}
+              >
+                <motion.img
+                  src={photo[1].url}
+                  alt="parking"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.05 }}
+                />
+              </motion.div>);})}
+          </div>
+        </div>
       </div>
-      {/* <div className="img-grid">
-				{content.map((photo) => {
-					console.log(photo)
-					return (<motion.div
-            className="img-wrap"
-            key={photo.id}
-            layout
-            whileHover={{ opacity: 1 }}
-            onClick={() => setSelected(photo.url)}
-          >
-            <motion.img
-              src={photo.url}
-              alt="parking"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.05 }}
-            />
-          </motion.div>);})}
-      </div> */}
       {/* {selected && (
 				<Modal
 					selected={selected}

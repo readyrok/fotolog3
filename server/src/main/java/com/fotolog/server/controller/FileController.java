@@ -45,6 +45,7 @@ public class FileController {
     }
 
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
     public List<FileResponse> list() {
         return fileService.getAllFiles()
                 .stream()
