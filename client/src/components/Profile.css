@@ -1,0 +1,28 @@
+.profile{
+    width: 80vh;
+    height: auto;
+    padding: 30px 30px 30px 30px;
+    background-color: #0f0f0f;
+    color: #E4DFDA;
+    margin: 0px 0px 0px 384px;
+    float: left;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 6vh;
+}
+
+.profile-header{
+    margin: 0px 0px 0px 384px;
+    padding: 30px 30px 30px 30px;
+    height: 11.6vh;
+    width: auto;
+    background-color: #E4DFDA;
+}
+
+.role-list{
+    list-style: none;
+}
+
+.profile-header{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 6vh;
+}

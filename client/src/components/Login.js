@@ -2,6 +2,7 @@ import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup"; // used when validating with a pre-built solution
 import AuthService from "../services/auth.service";
+import "./Login.css";
 
 
 const Login = () => (
@@ -22,8 +23,6 @@ const Login = () => (
                 error.response.data.message) ||
               error.message ||
               error.toString();
-
-            console.log(resMessage);
           }
         );
 
@@ -33,11 +32,9 @@ const Login = () => (
 
     validationSchema={Yup.object().shape({
       username: Yup.string()
-        .required("Required"),
+        .required(".REQUIRED"),
       password: Yup.string()
-        .required("No password provided.")
-        .min(6, "Password is too short - should be 6 chars minimum.")
-        .matches(/(?=.*[0-9])/, "Password must contain a number.")
+        .required(".NO PASSWORD PROVIDED")
     })}
   >
     {props => {
@@ -52,45 +49,46 @@ const Login = () => (
       } = props;
 
       return (
-        <form onSubmit={handleSubmit}>
+        <div className="background">
+          <form className="login" onSubmit={handleSubmit}>
+            <label htmlFor="username">.USERNAME</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="..."
+              value={values.username}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.username && touched.username && "error"}
+            />
 
-          <label htmlFor="username">Username</label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            placeholder="Enter your username"
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.username && touched.username && "error"}
-          />
+            {errors.username && touched.username && (
+              <div className="input-feedback">{errors.username}</div>
+            )}
 
-          {errors.username && touched.username && (
-            <div className="input-feedback">{errors.username}</div>
-          )}
+            <label htmlFor="password">.PASSWORD</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="..."
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.password && touched.password && "error"}
+            />
 
-          <label htmlFor="password">Password</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Enter your password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.password && touched.password && "error"}
-          />
+            {errors.password && touched.password && (
+              <div className="input-feedback">{errors.password}</div>
+            )}
 
-          {errors.password && touched.password && (
-            <div className="input-feedback">{errors.password}</div>
-          )}
+            <button type="submit" id="submit-login" disabled={isSubmitting}>
+              .LOGIN
+            </button>
 
-          <button type="submit" disabled={isSubmitting}>
-            Login
-          </button>
-
-        </form>
+            </form>
+        </div>
       );
     }}
   </Formik>

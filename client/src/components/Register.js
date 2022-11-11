@@ -2,10 +2,11 @@ import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup"; // used when validating with a pre-built solution
 import AuthService from "../services/auth.service";
+import './Register.css';
 
 const Register = () => (
   <Formik
-    initialValues={{ username: "", password: "", email:"" }}
+    initialValues={{ username: "", password: "", email: "", confirmPassword: "" }}
     onSubmit={(values, { setSubmitting }) => {
       setTimeout(() => {
         AuthService.register(values.username, values.email, values.password).then(
@@ -19,8 +20,6 @@ const Register = () => (
                 error.response.data.message) ||
               error.message ||
               error.toString();
-
-            console.log(resMessage);
           }
         );
 
@@ -30,14 +29,19 @@ const Register = () => (
 
     validationSchema={Yup.object().shape({
       username: Yup.string()
-        .required("Required"),
+        .required(".REQUIRED"),
       password: Yup.string()
-        .required("No password provided.")
-        .min(6, "Password is too short - should be 6 chars minimum.")
-        .matches(/(?=.*[0-9])/, "Password must contain a number."),
+        .required(".NO PASSWORD PROVIDED")
+        .min(6, ".MINIMUM 6 CHAR NEEDED")
+        .matches(/(?=.*[0-9])/, ".MUST CONTAIN NUMBER"),
       email: Yup.string()
-        .email() 
-        .required("Required")
+        .email(".EMAIL NOT VALID") 
+        .required(".REQUIRED"),
+      confirmPassword: Yup.string()
+        .required(".NO PASSWORD PROVIDED")
+        .min(6, ".MINIMUM 6 CHAR NEEDED")
+        .matches(/(?=.*[0-9])/, ".MUST CONTAIN NUMBER")
+        .oneOf([Yup.ref('password'), null], '.PASSWORDS MUST MATCH')
     })}
   >
     {props => {
@@ -52,14 +56,15 @@ const Register = () => (
       } = props;
 
       return (
-        <form onSubmit={handleSubmit}>
+        <div className="background">
+          <form className="register" onSubmit={handleSubmit}>
 
-          <label htmlFor="username">Username</label>
+          <label htmlFor="username">USERNAME</label>
           <input
             id="username"
             name="username"
             type="text"
-            placeholder="Enter your username"
+            placeholder="..."
             value={values.username}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -70,12 +75,12 @@ const Register = () => (
             <div className="input-feedback">{errors.username}</div>
           )}
 
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">EMAIL</label>
           <input
             id="email"
             name="email"
             type="email"
-            placeholder="Enter your email"
+            placeholder="..."
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -86,12 +91,12 @@ const Register = () => (
             <div className="input-feedback">{errors.email}</div>
           )}
 
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">PASSWORD</label>
           <input
             id="password"
             name="password"
             type="password"
-            placeholder="Enter your password"
+            placeholder="..."
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
@@ -102,11 +107,28 @@ const Register = () => (
             <div className="input-feedback">{errors.password}</div>
           )}
 
-          <button type="submit" disabled={isSubmitting}>
-            Sign Up
+          <label htmlFor="confirmPassword">CONFIRM PASSWORD</label>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            placeholder="..."
+            value={values.confirmPassword}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            className={errors.confirmPassword && touched.confirmPassword && "error"}
+          />
+
+          {errors.confirmPassword && touched.confirmPassword && (
+            <div className="input-feedback">{errors.confirmPassword}</div>
+          )}
+
+          <button type="submit" id="submit-register" disabled={isSubmitting}>
+            SIGN UP
           </button>
 
-        </form>
+          </form>
+        </div>
       );
     }}
   </Formik>

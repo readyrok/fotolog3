@@ -34,7 +34,7 @@ const BoardUser = () => {
         setContent(_content);
       }
     );
-  }, [url, description, images]);
+  }, []);
 
   return (
     <Fragment>

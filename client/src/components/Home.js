@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-
+import Image from '../images/4382.jpg'
 import UserService from "../services/user.service";
+import "./Home.css";
 
 const Home = () => {
-  const [content, setContent] = useState("");
+
+  const[content, setContent] = useState("");
 
   useEffect(() => {
     UserService.getPublicContent().then(
@@ -22,12 +24,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
+    <div className="image-wrap">
+        <img src={Image} alt="Main" className="main-photo"/>
     </div>
-  );
-};
+  )
+}
 
 export default Home;
