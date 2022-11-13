@@ -19,6 +19,7 @@
     width: 300px;
     transition: .3s background-color ease;
     transition: .3s color ease;
+    font-weight: 800;
 }
 
 #submit-register:hover{

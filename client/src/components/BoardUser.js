@@ -16,6 +16,7 @@ const BoardUser = () => {
     UserService.getUserBoard().then(
       (response) => {
         const LAST_PHOTO_INDEX = response.data.length - 1;
+        console.log(response.data);
         setImages(Object.entries(response.data));
 
         setUrl(response.data[LAST_PHOTO_INDEX]["url"]);

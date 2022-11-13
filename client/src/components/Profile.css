@@ -1,5 +1,5 @@
 .profile{
-    width: 80vh;
+    width: 100vh;
     height: auto;
     padding: 30px 30px 30px 30px;
     background-color: #0f0f0f;
@@ -7,15 +7,17 @@
     margin: 0px 0px 0px 384px;
     float: left;
     font-family: 'Work Sans', sans-serif;
-    font-size: 6vh;
+    font-size: 7vh;
 }
 
 .profile-header{
     margin: 0px 0px 0px 384px;
-    padding: 30px 30px 30px 30px;
+    padding: 5px 27px 27px 27px;
     height: 11.6vh;
-    width: auto;
-    background-color: #E4DFDA;
+    width: 100vh;
+    background-color: #3993DD;
+    color: #E4DFDA;
+    font-weight: 800;
 }
 
 .role-list{
@@ -24,5 +26,18 @@
 
 .profile-header{
     font-family: 'Work Sans', sans-serif;
-    font-size: 6vh;
+    font-size: 7vh;
+}
+
+ul{
+    padding: 0;
+    margin: 0;
+}
+
+#edit{
+    text-align: left;
+}
+
+.info{
+    font-weight: 600;
 }

@@ -17,11 +17,13 @@
 }
 
 label{
+    font-weight: 800;
     display: block;
     padding: 4px 0px 0px 0px;
 }
 
 input{
+    font-weight: 800;
     display: block;
     text-transform: uppercase;
     padding: 10px;
@@ -33,6 +35,7 @@ input{
 }
 
 #submit-login{
+    font-weight: 800;
     border: 0;
     background-color: #E4DFDA;
     color: #0f0f0f;

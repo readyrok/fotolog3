@@ -124,7 +124,7 @@ const Register = () => (
           )}
 
           <button type="submit" id="submit-register" disabled={isSubmitting}>
-            SIGN UP
+            .SIGN UP
           </button>
 
           </form>

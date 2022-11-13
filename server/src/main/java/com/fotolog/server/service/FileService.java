@@ -31,7 +31,7 @@ public class FileService {
         fileEntity.setSize(file.getSize());
         fileEntity.setUploader(uploader);
         fileEntity.setDescription(description);
-
+        System.out.println(fileEntity.getUploader());
         fileRepository.save(fileEntity);
     }
 

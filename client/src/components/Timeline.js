@@ -3,6 +3,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { motion } from 'framer-motion';
 
 import UserService from "../services/user.service";
+import './Timeline.css';
 
 const Timeline = () => {
   const [content, setContent] = useState("");
@@ -28,7 +29,7 @@ const Timeline = () => {
 
   return (
     <Fragment>
-      <div className="container">
+      <div className="background">
         <div className="mainPhotoContainer">
             <div className="timeline-grid">
                 {images.map((photo) => {
@@ -46,9 +47,16 @@ const Timeline = () => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.05 }}
                     />
+                    <div className="img-info">
+                      <div className="head-info">
+                        .POSTED BY {photo[1].uploader}
+                      </div>
+                      <div className="head-description">
+                        .{photo[1].description}
+                      </div>
+                    </div>
                     </motion.div>);})}
             </div>
-            
         </div>
       </div>
     </Fragment>

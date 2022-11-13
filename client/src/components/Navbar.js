@@ -68,7 +68,7 @@ const Navbar = () => {
                 {currentUser ? (
                     <div>
                         <li className="item">
-                            <Link to="/page" className="link">
+                            <Link to={userUrl} className="link">
                                 .PAGE
                             </Link>
                         </li>

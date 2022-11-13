@@ -16,14 +16,18 @@ import BoardModerator from "./components/BoardModerator";
 import BoardAdmin from "./components/BoardAdmin";
 import Upload from "./components/Upload";
 import Timeline from "./components/Timeline";
+import EditProfile from "./components/EditProfile";
 
 const App = () => {
-  // const user = AuthService.getCurrentUser();
-  // const [userUrl, setUserUrl] = useState("");
+  const user = AuthService.getCurrentUser();
+  const [userUrl, setUserUrl] = useState("");
 
-  // if(user){
-  //   setUserUrl("/files/" + user["username"]);
-  // }  
+  useEffect(() => {
+    if(user){
+      setUserUrl("/files/" + user["username"]);
+    } 
+  });
+   
 
   return (
     <div className="app">
@@ -32,18 +36,18 @@ const App = () => {
       <div>
           <Routes>
             <Route path="/" element={<Home/>} />
-            {/* <Route path="/home" element={<Home/>} /> */}
             <Route path="/files" element={<Timeline/>} />
             <Route path="/login" element={<Login/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/profile" element={<Profile/>} />
-            <Route path="/page" element={<BoardUser/>} />
-            {/* <Route path={userUrl} element={<BoardUser/>} /> */}
+            {/* <Route path="/page" element={<BoardUser/>} /> */}
+            <Route path={userUrl} element={<BoardUser/>} />
             <Route path="/mod" element={<BoardModerator/>} />
             <Route path="/admin" element={<BoardAdmin/>} />
             {/* <Route path="/about" element={<About/>} />
             <Route path="/contact" element={<Contact/>} /> */}
-            <Route path="/upload" element={<Upload/>} />  
+            <Route path="/upload" element={<Upload/>} />
+            <Route path="/edit-profile" element={<EditProfile/>} />   
           </Routes>
       </div> 
     </div>
