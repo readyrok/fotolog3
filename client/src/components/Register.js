@@ -58,75 +58,73 @@ const Register = () => (
       return (
         <div className="background">
           <form className="register" onSubmit={handleSubmit}>
+            <label htmlFor="username">.USERNAME</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="..."
+              value={values.username}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.username && touched.username && "error"}
+            />
 
-          <label htmlFor="username">USERNAME</label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            placeholder="..."
-            value={values.username}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.username && touched.username && "error"}
-          />
+            {errors.username && touched.username && (
+              <div className="input-feedback">{errors.username}</div>
+            )}
 
-          {errors.username && touched.username && (
-            <div className="input-feedback">{errors.username}</div>
-          )}
+            <label htmlFor="email">.EMAIL</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="..."
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.email && touched.email && "error"}
+            />
 
-          <label htmlFor="email">EMAIL</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="..."
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.email && touched.email && "error"}
-          />
+            {errors.email && touched.email && (
+              <div className="input-feedback">{errors.email}</div>
+            )}
 
-          {errors.email && touched.email && (
-            <div className="input-feedback">{errors.email}</div>
-          )}
+            <label htmlFor="password">.PASSWORD</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="..."
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.password && touched.password && "error"}
+            />
 
-          <label htmlFor="password">PASSWORD</label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="..."
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.password && touched.password && "error"}
-          />
+            {errors.password && touched.password && (
+              <div className="input-feedback">{errors.password}</div>
+            )}
 
-          {errors.password && touched.password && (
-            <div className="input-feedback">{errors.password}</div>
-          )}
+            <label htmlFor="confirmPassword">.CONFIRM PASSWORD</label>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              placeholder="..."
+              value={values.confirmPassword}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              className={errors.confirmPassword && touched.confirmPassword && "error"}
+            />
 
-          <label htmlFor="confirmPassword">CONFIRM PASSWORD</label>
-          <input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            placeholder="..."
-            value={values.confirmPassword}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={errors.confirmPassword && touched.confirmPassword && "error"}
-          />
+            {errors.confirmPassword && touched.confirmPassword && (
+              <div className="input-feedback">{errors.confirmPassword}</div>
+            )}
 
-          {errors.confirmPassword && touched.confirmPassword && (
-            <div className="input-feedback">{errors.confirmPassword}</div>
-          )}
-
-          <button type="submit" id="submit-register" disabled={isSubmitting}>
-            .SIGN UP
-          </button>
-
+            <button type="submit" id="submit-register" disabled={isSubmitting}>
+              .SIGN UP
+            </button>
           </form>
         </div>
       );

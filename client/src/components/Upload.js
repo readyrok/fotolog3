@@ -1,19 +1,24 @@
 import React, { Fragment, useState } from 'react';
 import FileUploader from './FileUploader';
-import TextField from '@mui/material/TextField';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import FileService from '../services/file.service';
+import './Upload.css';
 
 const UploadFile = () => {
-	const submitForm = () => {		
+	const submitForm = (e) => {
+		e.preventDefault();		
 		const formData = new FormData();
 		formData.append('file', selectedFile);
 		formData.append('description', description);
 		formData.append('tag', tag);
 		formData.append('uploader', JSON.parse(localStorage.getItem("user"))["username"]);
+		console.log(selectedFile)
+		console.log(description)
+		console.log(tag)
+		console.log(formData)
 		FileService.upload(formData)
 	};
 
@@ -23,33 +28,22 @@ const UploadFile = () => {
 
 	return (
 		<Fragment>
-			<form onSubmit={submitForm}>
+			<form id="upload-form" onSubmit={submitForm}>
 				<div>					
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Description"
-                        style={{ padding: "10px"}}
-                        onChange={(e) => setDescription(e.target.value)}
-                        />
+					<label htmlFor="description">.DESCRIPTION</label>	
+					<input id="description" type="text" onChange={(e) => setDescription(e.target.value)}/>
 
-                    <TextField
-                        required
-                        id="outlined-required"
-                        label="Tags"
-                        style={{ padding: "10px"}}
-                        onChange={(e) => setTag(e.target.value)}
-                        />					
+					<label htmlFor="tags">.TAGS</label>	
+					<input id="tags" type="text" onChange={(e) => setTag(e.target.value)}/>			
 				</div>
 				<FileUploader
-					onFileSelect={(file) => setSelectedFile(file)}
-					onFileSelectError={(error) => {
-						console.log(error);
-						alert(error);
-					}}
-				/>
-				<div style={{ padding: "10px", display: "inline-block" }}>
-					<button>Upload</button>
+						onFileSelect={(file) => setSelectedFile(file)}
+						onFileSelectError={(error) => {
+							alert(error);
+						}}
+					/>
+				<div style={{display: "inline-block"}}>
+					<button id="upload-btn">.UPLOAD</button>
 				</div>				
 			</form>
 		</Fragment>
