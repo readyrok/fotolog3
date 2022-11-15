@@ -1,0 +1,33 @@
+.img-grid{
+    margin:0px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 0px;
+    padding: 0px 0px 0px 20vw;
+}
+
+.img-grid-wrap{
+    overflow: hidden;
+    height:286px;
+    padding: 70px 0;
+    position: relative;
+    opacity: 0.8;
+    }
+
+.img-grid-wrap img{
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 150%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.page-header{
+    height: 112px;
+    text-align: center;
+    background-color: #EE6123;
+    padding: 0px 0px 0px 20vw;
+    font-weight: 800;
+    font-size: 7vh;
+}
