@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 
+import './BoardAdmin.css'
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 
@@ -29,11 +30,7 @@ const BoardAdmin = () => {
   }, []);
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
-    </div>
+        <h3>CONGRATULATIONS YOU'RE AN ADMIN YOU CAN DO WHAT YOU WANT!</h3>
   );
 };
 

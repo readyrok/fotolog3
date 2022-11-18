@@ -4,10 +4,10 @@
     padding: 0px 30px 40px 30px;
     background-color: #0f0f0f;
     color: #E4DFDA;
-    margin: 0px 0px 0px 384px;
+    margin: 0px 0px 0px 20vw;
     float: left;
     font-family: 'Work Sans', sans-serif;
-    font-size: 6vh;
+    font-size: 7vh;
 }
 
 #submit-register{
@@ -16,13 +16,13 @@
     color: #0f0f0f;
     margin: 30px 0px 0px 0px;
     padding: 10px;
-    width: 300px;
-    transition: .3s background-color ease;
+    width: 250px;
+    transition: .3s text-decoration-line ease;
     transition: .3s color ease;
     font-weight: 800;
 }
 
 #submit-register:hover{
-    background-color: #0f0f0f;
-    color: #2B9720;
+    color: #EE6123;
+    text-decoration-line: underline;
 }

@@ -5,36 +5,32 @@
     font-family: 'Work Sans', sans-serif;
     background-color: #0f0f0f;
     color: #E4DFDA;
-    width: 384px;
+    width: 20vw;
     height: 100vh;
-    padding: 0px 0px 0px 10px;
     position: fixed; 
     float: left;
     font-weight: 800;
 }
 
 .welcome{
-    font-size: 7vh;
+    font-size: 7vw;
     text-align: right;
-    height: auto;
     top: 0;
-    position: absolute;
-    right: 26px;
-    padding: 2vh 0vh 0vh 0vh;
-    line-height: 6vh;
+    position: relative;
+    right: 0px;
+    line-height: 4vh;
+    margin: 0px 0px 80vh 0px;
 }
 
 .link{
     color: #E4DFDA;
     font-size: 7vh;
     padding: 0;
-    font-weight: 800;
     transition: .3s font-style ease;
 }
 
 .link:hover{
     color: #EE6123;
-    font-style: italic;
 }
 
 .item{
@@ -47,9 +43,8 @@
     list-style: none;
     position: fixed;
     padding: 0px 0px 0px 7px;
-    margin: 0;
-    bottom: 0;
-    line-height: 4.2vh;
+    bottom: 5px;
+    line-height: 5vh;
 }
 
 .hello{
@@ -63,11 +58,18 @@
 }
 
 .avatar{
+    width: 87px;
     top: 0;
-    padding: 0px 0px 0px 17px;
+    padding: 0px 0px 0px 10px;
     position: absolute;
+    transition: .3s opacity ease;
+
 }
 
 p {
     margin: 0;
+}
+
+.avatar:hover{
+    opacity: 0.5;
 }

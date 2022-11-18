@@ -4,6 +4,21 @@ import authHeader from "./auth-header";
 const API_URL = "http://localhost:8080/api/test/";
 const API_USER_URL = "http://localhost:8080/files/";
 
+const isPostLiked = (postId) => {
+  return axios.get(API_USER_URL + "likes/" + postId + "/" + JSON.parse(localStorage.getItem("user"))["id"], { headers: authHeader() });
+}
+
+const saveLike = (postId) => {
+  return axios.post(API_USER_URL + "likes/" + postId, "like", { headers: authHeader() });
+}
+
+const deleteLike = (postId) => {
+  return axios.delete(API_USER_URL + "likes/" + postId + "/" + JSON.parse(localStorage.getItem("user"))["id"], {headers: authHeader()});
+}
+
+const countLikes = (postId) => {
+  return axios.get(API_USER_URL + "like/" + postId, {headers: authHeader()} )
+}
 
 const getPublicContent = () => {
   return axios.get(API_URL + "all");
@@ -14,7 +29,12 @@ const getTimeline = () => {
 };
 
 const getUserBoard = () => {
-  return axios.get(API_USER_URL + JSON.parse(localStorage.getItem("user"))["username"], { headers: authHeader() });
+  if(JSON.parse(localStorage.getItem("user"))["username"]){
+    return axios.get(API_USER_URL + JSON.parse(localStorage.getItem("user"))["username"], { headers: authHeader() });
+  }else{
+    localStorage.setItem("username", "GUEST");
+    return "GUEST";
+  }
 };
 
 const getFile = (url) => {
@@ -36,7 +56,11 @@ const UserService = {
   getModeratorBoard,
   getAdminBoard,
   getFile,
-  getTimeline
+  getTimeline,
+  saveLike,
+  deleteLike,
+  countLikes,
+  isPostLiked
 };
 
 export default UserService;

@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface FileRepository extends JpaRepository<FileEntity, String> {
     List<FileEntity> findAllByUploader(String uploader);
+
 }

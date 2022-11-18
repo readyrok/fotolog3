@@ -29,5 +29,5 @@ public class FileEntity {
     @Type(type = "org.hibernate.type.ImageType")
     private byte[] data;
     private String uploader;
-    //TODO tags
+    private String tags;
 }

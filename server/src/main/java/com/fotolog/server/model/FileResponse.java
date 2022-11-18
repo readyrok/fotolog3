@@ -16,4 +16,5 @@ public class FileResponse {
     private String url;
     private String contentType;
     private String uploader;
+    private String tags;
 }

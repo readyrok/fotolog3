@@ -3,6 +3,7 @@ package com.fotolog.server.controller;
 import com.fotolog.server.model.FileEntity;
 import com.fotolog.server.model.FileResponse;
 import com.fotolog.server.service.FileService;
+import com.fotolog.server.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,20 +25,23 @@ import java.util.stream.Collectors;
 public class FileController {
 
     private final FileService fileService;
+    private final LikeService likeService;
 
     @Autowired
-    public FileController(FileService fileService) {
+    public FileController(FileService fileService, LikeService likeService) {
         this.fileService = fileService;
+        this.likeService = likeService;
     }
 
     @PostMapping
     @PreAuthorize("hasRole('USER') or hasRole('MODERATOR') or hasRole('ADMIN')")
     public ResponseEntity<String> upload(@RequestParam("file") MultipartFile file,
                                          @RequestParam("uploader") String uploader,
-                                         @RequestParam("description") String description) {
+                                         @RequestParam("description") String description,
+                                         @RequestParam("tags") String tags) {
         try {
-            System.out.println(uploader);
-            fileService.save(file, uploader, description);
+            System.out.println(file);
+            fileService.save(file, uploader, description, tags);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("File uploaded successfully: %s", file.getOriginalFilename()));
         } catch (Exception e) {
@@ -75,8 +80,10 @@ public class FileController {
         fileResponse.setContentType(fileEntity.getContentType());
         fileResponse.setSize(fileEntity.getSize());
         fileResponse.setUrl(downloadURL);
+        fileResponse.setUploadDate(fileEntity.getUploadDate());
         fileResponse.setUploader(fileEntity.getUploader());
         fileResponse.setDescription(fileEntity.getDescription());
+        fileResponse.setTags(fileEntity.getTags());
 
         return fileResponse;
     }
@@ -95,5 +102,30 @@ public class FileController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileEntity.getName() + "\"")
                 .contentType(MediaType.valueOf(fileEntity.getContentType()))
                 .body(fileEntity.getData());
+    }
+
+    @GetMapping("/like/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
+    public Long countLikesByPostId(@PathVariable("id") String id){
+        return likeService.countLikesByPostId(id);
+    }
+
+    @GetMapping("/likes/{postId}/{userId}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
+    public boolean isPostLiked(@PathVariable("postId")String postId, @PathVariable("userId") String userId){
+        return likeService.isPostLiked(postId, userId);
+    }
+
+    @PostMapping("/likes/{id}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
+    public void savePostLike(@PathVariable("id") String id){
+        likeService.addPostLike(id);
+    }
+
+    @DeleteMapping("/likes/{postId}/{userId}")
+    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
+    public void deletePostLike(@PathVariable("postId") String postId, @PathVariable("userId") String userId){
+        System.out.println("STARTED DELETE: ");
+        likeService.deletePostLike(postId, userId);
     }
 }

@@ -59,7 +59,7 @@ const Register = () => (
         <div className="background">
           <form className="register" onSubmit={handleSubmit}>
 
-          <label htmlFor="username">USERNAME</label>
+          <label htmlFor="username">.USERNAME</label>
           <input
             id="username"
             name="username"
@@ -75,7 +75,7 @@ const Register = () => (
             <div className="input-feedback">{errors.username}</div>
           )}
 
-          <label htmlFor="email">EMAIL</label>
+          <label htmlFor="email">.EMAIL</label>
           <input
             id="email"
             name="email"
@@ -91,7 +91,7 @@ const Register = () => (
             <div className="input-feedback">{errors.email}</div>
           )}
 
-          <label htmlFor="password">PASSWORD</label>
+          <label htmlFor="password">.PASSWORD</label>
           <input
             id="password"
             name="password"
@@ -107,7 +107,7 @@ const Register = () => (
             <div className="input-feedback">{errors.password}</div>
           )}
 
-          <label htmlFor="confirmPassword">CONFIRM PASSWORD</label>
+          <label htmlFor="confirmPassword">.CONFIRM PASSWORD</label>
           <input
             id="confirmPassword"
             name="confirmPassword"
@@ -124,7 +124,7 @@ const Register = () => (
           )}
 
           <button type="submit" id="submit-register" disabled={isSubmitting}>
-            .SIGN UP
+            .SIGNUP
           </button>
 
           </form>

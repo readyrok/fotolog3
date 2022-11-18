@@ -14,7 +14,7 @@ const Login = () => (
         
         AuthService.login(values.username, values.password).then(
           () => {
-            window.location.replace("/profile");
+            window.location.replace("/files");
           },
           (error) => {
             const resMessage =

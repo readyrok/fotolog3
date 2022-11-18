@@ -17,38 +17,40 @@ const Profile = () => {
     <div className="background">
       <div className="profile-header">
           <p>
-            .{username}
+            @{username}
           </p>
       </div>
       <div className="profile">
-        <p>
+        <span>
           <strong>.INFO:</strong>
-          <p className="info">AS THE WORLD TURNS I SPREAD LIKE GERMS.</p>
-        </p>
-        <p>
+          <p className="info">LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT.</p>
+        </span>
+        <span>
           <strong>.EMAIL:</strong>
-          <p className="info">{email}</p>
-        </p>
-        <p>
+          <Link to={"#"} onClick = {() => openInNewTab(`mailto:${currentUser.email}`)} className="link info" >
+            <p className="info">{email}</p>
+          </Link>
+          {/* <Link to={`mailto:${email}`}>
+          </Link> */}          
+        </span>
+        <span>
           <strong>.SITE: </strong>
           <p className="info">
             <Link to={"#"} onClick = {() => openInNewTab("http://instagram.com/ready.rok/")}  className="link info">
-              @READY.ROK
+              @SEBSEB
             </Link>
           </p> 
           <p>
             <Link to={"#"} onClick = {() => openInNewTab("http://instagram.com/ready.rok/")} className="link info">
-              @READYROK.COM
+              @SEBSEB.COM
             </Link>
           </p>         
-        </p>
-        <ul className="role-list">
-          <li className="item" id="edit">
-              <Link to={"/edit-profile"} className="link">
-                  .EDIT PROFILE
-              </Link>
-          </li>
-        </ul>
+        </span>
+        <Link to={"/edit-profile"} id="edit-btn">
+          <button id="edit-profile">
+              .EDIT
+          </button>
+        </Link>
       </div>      
     </div>
   );

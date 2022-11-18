@@ -4,12 +4,14 @@ import Avatar from '../images/avatar.png';
 import "../App.css";
 import "./Navbar.css";
 import AuthService from "../services/auth.service";
+import UserService from "../services/user.service";
 
 const Navbar = () => {
     const [showModeratorBoard, setShowModeratorBoard] = useState(false);
     const [showAdminBoard, setShowAdminBoard] = useState(false);
     const [currentUser, setCurrentUser] = useState(undefined);
     const [userUrl, setUserUrl] = useState("")
+    const [showUploadButton, setShowUploadButton] = useState(false);
 
     useEffect(() => {
 
@@ -24,17 +26,43 @@ const Navbar = () => {
         }
 
     }, []);
+    
+    useEffect(()=> {
+        if(AuthService.getCurrentUser()){
+            UserService.getUserBoard().then(
+                (response) => {
+                    console.log(AuthService.getCurrentUser());
+                    if(response.data.length!==0){
+                        const lastUploadDate = new Date(response.data.reverse()[0]["uploadDate"]);
+                        const today = new Date();
+                        if(today.getDay()===lastUploadDate.getDay()
+                            &&today.getMonth()===lastUploadDate.getMonth()
+                            &&today.getFullYear()===lastUploadDate.getFullYear()){
+                                setShowUploadButton(false);
+                        }else{
+                            setShowUploadButton(true);
+                        }
+                    }else{
+                        setShowUploadButton(true);
+                    }
+                }
+            )
+        }
+            
+    }, [])
 
     const logOut = () => {
-    AuthService.logout();
+        AuthService.logout();
     };
 
     return (
         <div className="navbar">
             {currentUser ? (
                 <div className="hello">
-                    <p>HELLO!</p>
-                    <img src={Avatar} alt="Avatar" className="avatar"/>
+                    <p>.HELLO</p>
+                    <Link to={"/profile"}>
+                        <img src={Avatar} alt="Avatar" className="avatar"/>
+                    </Link>
                 </div>
             ) : (
                 <div className="welcome">
@@ -59,7 +87,7 @@ const Navbar = () => {
 
                 {showAdminBoard && (
                     <li className="item">
-                        <Link to={"/mod"} className="link">
+                        <Link to={"/admin"} className="link">
                             .ADMIN
                         </Link>
                     </li>
@@ -77,22 +105,18 @@ const Navbar = () => {
                             <Link to={"/files"} className="link">
                                 .TIMELINE
                             </Link>
-                        </li> 
-
-                        <li className="item">
-                            <Link to={"/profile"} className="link">
-                                .PROFILE
-                            </Link>
                         </li>
 
-                        <li className="item">
-                            <Link to={"/upload"} className="link">
-                                .UPLOAD
-                            </Link>
-                        </li>
+                        { showUploadButton && (
+                            <li className="item">
+                                <Link to={"/upload"} className="link">
+                                    .UPLOAD
+                                </Link>
+                            </li>
+                        )}
 
                         <li className="item">
-                            <a href="/login" className="link" onClick={logOut}>
+                            <a href="/" className="link" onClick={logOut}>
                                 .LOGOUT
                             </a>
                         </li>

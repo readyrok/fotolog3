@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -21,7 +22,7 @@ public class FileService {
         this.fileRepository = fileRepository;
     }
 
-    public void save(MultipartFile file, String uploader, String description) throws IOException {
+    public void save(MultipartFile file, String uploader, String description, String tags) throws IOException {
         FileEntity fileEntity = new FileEntity();
 
         fileEntity.setName(StringUtils.cleanPath(file.getOriginalFilename()));
@@ -31,7 +32,8 @@ public class FileService {
         fileEntity.setSize(file.getSize());
         fileEntity.setUploader(uploader);
         fileEntity.setDescription(description);
-        System.out.println(fileEntity.getUploader());
+        fileEntity.setTags(tags);
+
         fileRepository.save(fileEntity);
     }
 
