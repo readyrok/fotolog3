@@ -17,7 +17,6 @@ const Timeline = () => {
     UserService.getTimeline().then(
       (response) => {
         setImages(Object.entries(response.data).reverse());
-        console.log(Object.entries(response.data).reverse());
       },
       (error) => {
         const _content =
@@ -69,26 +68,17 @@ const Timeline = () => {
                     />
                     <div className="img-info">
                       <div className="head-info">
-                        @{photo[1].uploader.toUpperCase()}
+                        <Link className='user-link'  to={"/files/" + photo[1].uploader}>
+                          @{photo[1].uploader.toUpperCase()}
+                        </Link>                        
                       </div>
                       <div className="head-description">
                         .{photo[1].description.toUpperCase()}
                       </div>
                       <div className="head-description">
-                        #{photo[1].tags}
+                        #{photo[1].tags.toUpperCase()}
                       </div>
                     </div>
-                    {/* <Link to={"/files/likes/" + photo[1].id} onClick={event => handleLike(event, photo[1].id)}>
-                      <button className="modal-btn" id="like-timeline">
-                          {liked === false && (
-                              <FavoriteBorderIcon className="like-timeline"/>
-                          )}
-                          {liked === true && (
-                              <FavoriteIcon className="like-timeline"/>
-                          )}
-                          <div className="like-count">{likeCount}</div>
-                      </button>
-                    </Link> */}
                     </motion.div>);})}
             </div>
         </div>

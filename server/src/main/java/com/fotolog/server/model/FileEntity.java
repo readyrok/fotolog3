@@ -1,5 +1,6 @@
 package com.fotolog.server.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,7 +24,7 @@ public class FileEntity {
     private String id;
     private String name;
     private String description;
-    private LocalDate uploadDate;
+    private Date uploadDate;
     private String contentType;
     private Long size;
     @Lob
@@ -30,4 +32,7 @@ public class FileEntity {
     private byte[] data;
     private String uploader;
     private String tags;
+    @JsonBackReference
+    @OneToMany
+    private List<Comment> comments;
 }

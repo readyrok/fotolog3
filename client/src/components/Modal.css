@@ -57,3 +57,18 @@
     display: inline-block;
     margin: 0px 0px 0px 2px
 }
+
+#back{
+    width: 100px;
+}
+
+.comments{
+    height: auto;
+    width: 731px;
+    text-align: left;
+    background-color: #EE6123;
+    color: #E4DFDA;
+    font-weight: 800;
+    margin: 35px 100px 0px 400px;
+    padding: 0px 0px 5px;
+}

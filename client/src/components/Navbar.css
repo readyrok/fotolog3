@@ -48,13 +48,11 @@
 }
 
 .hello{
-    font-size: 7vh;
+    font-size: 8.1vh;
     text-align: right;
-    height: auto;
-    top: 0;
+    top: 3px;
     position: absolute;
-    padding: .5vh 0vh 0vh 0vh;
-    float: left;
+    right: 17px;
 }
 
 .avatar{
@@ -64,10 +62,6 @@
     position: absolute;
     transition: .3s opacity ease;
 
-}
-
-p {
-    margin: 0;
 }
 
 .avatar:hover{

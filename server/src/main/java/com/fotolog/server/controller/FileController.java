@@ -3,7 +3,6 @@ package com.fotolog.server.controller;
 import com.fotolog.server.model.FileEntity;
 import com.fotolog.server.model.FileResponse;
 import com.fotolog.server.service.FileService;
-import com.fotolog.server.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,12 +23,10 @@ import java.util.stream.Collectors;
 public class FileController {
 
     private final FileService fileService;
-    private final LikeService likeService;
 
     @Autowired
-    public FileController(FileService fileService, LikeService likeService) {
+    public FileController(FileService fileService) {
         this.fileService = fileService;
-        this.likeService = likeService;
     }
 
     @PostMapping
@@ -62,7 +58,7 @@ public class FileController {
     @GetMapping("/{user}")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
     public List<FileResponse> listAllByUploader(@PathVariable("user") String user) {
-        System.out.println(user);
+        System.out.println("List all by: " + user);
         return fileService.findAllFilesByUploader(user)
                 .stream()
                 .map(this::mapToFileResponse)
@@ -104,28 +100,10 @@ public class FileController {
                 .body(fileEntity.getData());
     }
 
-    @GetMapping("/like/{id}")
+    @DeleteMapping("/photo/{id}")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
-    public Long countLikesByPostId(@PathVariable("id") String id){
-        return likeService.countLikesByPostId(id);
-    }
+    public void deleteFile(@PathVariable("id") String id){
 
-    @GetMapping("/likes/{postId}/{userId}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
-    public boolean isPostLiked(@PathVariable("postId")String postId, @PathVariable("userId") String userId){
-        return likeService.isPostLiked(postId, userId);
-    }
-
-    @PostMapping("/likes/{id}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
-    public void savePostLike(@PathVariable("id") String id){
-        likeService.addPostLike(id);
-    }
-
-    @DeleteMapping("/likes/{postId}/{userId}")
-    @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
-    public void deletePostLike(@PathVariable("postId") String postId, @PathVariable("userId") String userId){
-        System.out.println("STARTED DELETE: ");
-        likeService.deletePostLike(postId, userId);
+        fileService.deleteFile(id);
     }
 }

@@ -12,6 +12,15 @@
     position: relative;
 }
 
+.user-link{
+    transition: .3s color ease; 
+    color:#E4DFDA
+}
+
+.user-link:hover{
+    color:#0f0f0f
+}
+
 .img-info{
     background-color: #EE6123;
     color: #E4DFDA;
@@ -19,7 +28,7 @@
     font-size: 3vh;
     width: 14.5vw;
     height: 49.6vh;
-    margin: 0px 0px 0px 822px;
+    margin: 0px 0px 0px 822.5px;
     position: absolute;
     top: 0;
 }
@@ -45,6 +54,7 @@
 
 .head-info{
     margin: 10px 0px 10px 20px;
+    color:#E4DFDA;
 }
 
 .head-description{

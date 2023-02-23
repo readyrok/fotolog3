@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, Fragment } from "react";
 import './BoardAdmin.css'
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 
 const BoardAdmin = () => {
   const [content, setContent] = useState("");
+  const [users, setUsers] = useState({});
 
   useEffect(() => {
     UserService.getAdminBoard().then(
       (response) => {
-        setContent(response.data);
+        setUsers(response.data);
+        console.log(response.data);
+        console.log(users);
       },
       (error) => {
         const _content =
@@ -30,7 +32,17 @@ const BoardAdmin = () => {
   }, []);
 
   return (
-        <h3>CONGRATULATIONS YOU'RE AN ADMIN YOU CAN DO WHAT YOU WANT!</h3>
+        <Fragment>
+          <h3 className="admin-header">.ADMIN BOARD</h3>
+          <div className="user-list">
+            {users.map((user) => {
+              return(<div className='user' key={user.id}>
+                    <div>{user.email}</div>
+                    <button className="delete-btn">.DELETE</button>
+                </div>);
+            })}
+          </div>
+        </Fragment>
   );
 };
 

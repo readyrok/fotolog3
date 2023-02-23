@@ -48,11 +48,11 @@ const Page = () => {
     <Fragment>
       <div className="page-header">
         <span>@{username.toUpperCase()}</span>
-        <Link className="header-link">
+        {/* <Link className="header-link">
             <button className="page-header-btn">
                 +FOLLOW
             </button>
-        </Link>
+        </Link> */}
       </div>
       <div className="img-grid">
       {images.map((photo) => {

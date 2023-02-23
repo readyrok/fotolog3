@@ -9,21 +9,17 @@ import './Upload.css';
 
 const UploadFile = () => {
 	const submitForm = (e) => {
+		e.preventDefault();
 		const formData = new FormData();
 
-		// formData.append('file', selectedFile);
-		// formData.append('description', description);
-		// formData.append('tags', tag);
-		// formData.append('uploader', JSON.parse(localStorage.getItem("user"))["username"]);
 		formData.append('file', selectedFile);
 		formData.append('uploader', JSON.parse(localStorage.getItem("user"))["username"]);
 		formData.append('description', description);
 		formData.append('tags', tag);
-		console.log(selectedFile);
-		console.log(description);
-		console.log(tag);
-		console.log(formData);
+
 		FileService.upload(formData)
+
+		window.location.replace("/files"); 
 	};
 
     const [selectedFile, setSelectedFile] = useState(null);

@@ -60,9 +60,6 @@ const Navbar = () => {
             {currentUser ? (
                 <div className="hello">
                     <p>.HELLO</p>
-                    <Link to={"/profile"}>
-                        <img src={Avatar} alt="Avatar" className="avatar"/>
-                    </Link>
                 </div>
             ) : (
                 <div className="welcome">
@@ -93,8 +90,15 @@ const Navbar = () => {
                     </li>
                 )}
 
+
                 {currentUser ? (
                     <div>
+                        <li className="item">
+                            <Link to={"/profile"} className="link">
+                                .PROFILE
+                            </Link>
+                        </li>
+
                         <li className="item">
                             <Link to={userUrl} className="link">
                                 .PAGE

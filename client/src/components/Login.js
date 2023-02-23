@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
-import * as Yup from "yup"; // used when validating with a pre-built solution
+import * as Yup from "yup";
 import AuthService from "../services/auth.service";
 import "./Login.css";
 

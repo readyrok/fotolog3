@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
-import java.util.Optional;
-
 @Service
 @Transactional
 public class LikeService {
@@ -47,6 +44,5 @@ public class LikeService {
     public boolean isPostLiked(String postId, String userId){
         System.out.println(likeRepository.existsByPostIdAndUserId(postId, Long.parseLong(userId)));
         return likeRepository.existsByPostIdAndUserId(postId, Long.parseLong(userId));
-
     }
 }

@@ -1,23 +1,64 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:8080/api/test/";
+const API_URL = "http://localhost:8080/users/";
 const API_USER_URL = "http://localhost:8080/files/";
+const API_LIKE_URL = "http://localhost:8080/";
+
+const follow = (userId) => {
+  return axios.post(API_LIKE_URL + "follow/" + userId + "/" + JSON.parse(localStorage.getItem("user"))["id"], {headers: authHeader()})
+}
+
+const unfollow = (userId) => {
+  return axios.delete(API_LIKE_URL + "follow/" + userId + "/" + JSON.parse(localStorage.getItem("user"))["id"], {headers: authHeader()})
+}
+
+const getFollowers = () => {
+  return axios.get(API_LIKE_URL + "follow/followers/" + JSON.parse(localStorage.getItem("user"))["id"], {headers: authHeader()})
+}
+
+const getFollowing = () => {
+  return axios.get(API_LIKE_URL + "follow/following/" + JSON.parse(localStorage.getItem("user"))["id"], {headers: authHeader()})
+}
+
+const getFollowersCount = (userId) => {
+  return axios.get(API_LIKE_URL + "follow/follower_count/" + userId, {headers: authHeader()})
+}
+
+const getFollowingCount = (userId) => {
+  return axios.get(API_LIKE_URL + "follow/following_count/" + userId, {headers: authHeader()})
+}
+
+const getComment = (commentId) => {
+  return axios.get(API_LIKE_URL + "comments/comment/" + commentId, {headers: authHeader()})
+}
+
+const getComments = (postId) => {
+  return axios.get(API_LIKE_URL + "comments/" + postId, {headers: authHeader()})
+}
+
+const saveComment = (postId, formData) => {
+  return axios.post(API_LIKE_URL + "comments/" + postId, formData, {headers: authHeader()})
+}
+
+const deleteComment = (commentId) => {
+  return axios.delete(API_LIKE_URL + "comments/" + commentId, {headers: authHeader()})
+}
 
 const isPostLiked = (postId) => {
-  return axios.get(API_USER_URL + "likes/" + postId + "/" + JSON.parse(localStorage.getItem("user"))["id"], { headers: authHeader() });
+  return axios.get(API_LIKE_URL + "likes/" + postId + "/" + JSON.parse(localStorage.getItem("user"))["id"], { headers: authHeader() });
 }
 
 const saveLike = (postId) => {
-  return axios.post(API_USER_URL + "likes/" + postId, "like", { headers: authHeader() });
+  return axios.post(API_LIKE_URL + "likes/" + postId, "like", { headers: authHeader() });
 }
 
 const deleteLike = (postId) => {
-  return axios.delete(API_USER_URL + "likes/" + postId + "/" + JSON.parse(localStorage.getItem("user"))["id"], {headers: authHeader()});
+  return axios.delete(API_LIKE_URL + "likes/" + postId + "/" + JSON.parse(localStorage.getItem("user"))["id"], {headers: authHeader()});
 }
 
 const countLikes = (postId) => {
-  return axios.get(API_USER_URL + "like/" + postId, {headers: authHeader()} )
+  return axios.get(API_LIKE_URL + "likes/" + postId, {headers: authHeader()} )
 }
 
 const getPublicContent = () => {
@@ -47,7 +88,7 @@ const getModeratorBoard = () => {
 };
 
 const getAdminBoard = () => {
-  return axios.get(API_URL + "admin", { headers: authHeader() });
+  return axios.get(API_URL + "all", { headers: authHeader() });
 };
 
 const UserService = {
@@ -60,7 +101,17 @@ const UserService = {
   saveLike,
   deleteLike,
   countLikes,
-  isPostLiked
+  isPostLiked,
+  getComment,
+  getComments,
+  saveComment,
+  deleteComment,
+  follow,
+  unfollow,
+  getFollowers,
+  getFollowing,
+  getFollowersCount,
+  getFollowingCount
 };
 
 export default UserService;

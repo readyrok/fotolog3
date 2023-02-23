@@ -9,8 +9,13 @@ const upload = (formData) => {
     });
 };
 
-const FileService = {
-    upload
+const deleteFile = (id) => {
+    return axios.delete(API_URL + "photo/" + id + "/", {headers: authHeader()})
 }
+
+const FileService = {
+    upload,
+    deleteFile
+};
 
 export default FileService;
