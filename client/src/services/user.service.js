@@ -66,7 +66,7 @@ const getPublicContent = () => {
 };
 
 const getTimeline = () => {
-  return axios.get(API_USER_URL, { headers: authHeader() });
+  return axios.get("http://localhost:8080/file/", { headers: authHeader() });
 };
 
 const getUserBoard = () => {
@@ -79,7 +79,6 @@ const getUserBoard = () => {
 };
 
 const getFile = (url) => {
-  console.log("getFile url: " + url);
   return axios.get(url, { headers: authHeader() });
 }
 

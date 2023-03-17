@@ -106,7 +106,7 @@ const Navbar = () => {
                         </li>
 
                         <li className="item">
-                            <Link to={"/files"} className="link">
+                            <Link to={"/file"} className="link">
                                 .TIMELINE
                             </Link>
                         </li>

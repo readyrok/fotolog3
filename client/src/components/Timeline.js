@@ -16,7 +16,7 @@ const Timeline = () => {
   useEffect(() => {
     UserService.getTimeline().then(
       (response) => {
-        setImages(Object.entries(response.data).reverse());
+        setImages(response.data.reverse());
       },
       (error) => {
         const _content =
@@ -25,7 +25,7 @@ const Timeline = () => {
             error.response.data.message) ||
           error.message ||
           error.toString();
-
+        
         setContent(_content);
       }
     );
@@ -36,13 +36,9 @@ const Timeline = () => {
     if(liked === false){
         UserService.saveLike(id);
         setLiked(true);
-        let newLikeCount = likeCount++;
-        setLikeCount(newLikeCount);
     }else{
         UserService.deleteLike(id);
         setLiked(false);
-        let newLikeCount = likeCount--;
-        setLikeCount(newLikeCount);
     }
   }
 
@@ -54,12 +50,12 @@ const Timeline = () => {
                 {images.map((photo) => {
                 return (<motion.div
                     className="main-img-wrap"
-                    key={photo[1].id}
+                    key={photo.name}
                     layout
                     whileHover={{ opacity: 1 }}
                 >
                     <motion.img
-                    src={photo[1].url}
+                    src={photo.url}
                     alt="last one"
                     id="mainPhoto"
                     initial={{ opacity: 0 }}
@@ -67,7 +63,7 @@ const Timeline = () => {
                     transition={{ delay: 0.05 }}
                     />
                     <div className="img-info">
-                      <div className="head-info">
+                      {/* <div className="head-info">
                         <Link className='user-link'  to={"/files/" + photo[1].uploader}>
                           @{photo[1].uploader.toUpperCase()}
                         </Link>                        
@@ -77,7 +73,7 @@ const Timeline = () => {
                       </div>
                       <div className="head-description">
                         #{photo[1].tags.toUpperCase()}
-                      </div>
+                      </div> */}
                     </div>
                     </motion.div>);})}
             </div>

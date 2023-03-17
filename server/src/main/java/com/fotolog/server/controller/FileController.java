@@ -36,7 +36,6 @@ public class FileController {
                                          @RequestParam("description") String description,
                                          @RequestParam("tags") String tags) {
         try {
-            System.out.println(file);
             fileService.save(file, uploader, description, tags);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(String.format("File uploaded successfully: %s", file.getOriginalFilename()));
@@ -58,7 +57,6 @@ public class FileController {
     @GetMapping("/{user}")
     @PreAuthorize("hasRole('ROLE_USER') or hasRole('ROLE_MODERATOR') or hasRole('ROLE_ADMIN')")
     public List<FileResponse> listAllByUploader(@PathVariable("user") String user) {
-        System.out.println("List all by: " + user);
         return fileService.findAllFilesByUploader(user)
                 .stream()
                 .map(this::mapToFileResponse)
